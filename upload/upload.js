@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { QrImage } from "../models/QrImage.js";
+import QrImage from "../models/QrImage.js";
 import dotenv from "dotenv";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
