@@ -5,6 +5,7 @@ import connectDB from './config/db.js';
 import cookieParser from "cookie-parser";
 import upload from './upload/upload.js'
 import feedbackRoutes from './feedbackRoutes/feedback.js';
+import branch  from './auth/branchContoller.js'
 
 
 const app = express();
@@ -30,6 +31,7 @@ app.use('/api', signupAuth);
 app.use('/api', upload);
 // app.use('/api',authMiddleware,upload)
 app.use('/api', feedbackRoutes )
+app.use("/api", branch)
 
 
 // Server
