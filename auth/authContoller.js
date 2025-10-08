@@ -29,42 +29,6 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// // --- Login ---
-// router.post("/login", async (req, res) => {
-//   const { email, password } = req.body;
-
-//   try {
-//     const user = await Signup.findOne({ email });
-//     if (!user) return res.status(400).json({ message: "User not found" });
-
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
-
-//     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "100y" });
-
-//     res.cookie("token", token, {
-//       httpOnly: true,
-//       secure: true, // production me true
-//       sameSite: "none",
-//       maxAge: 60 * 60 * 1000,
-//     });
-
-//     res.status(200).json({
-//       message: "Login successful",
-//       user: { id: user._id, username: user.username, email: user.email },
-//     });
-//   } catch (error) {
-//     console.log("Error during login:", error);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// });
-
-
-
-
-
-
-
 // --- Login ---
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -76,36 +40,72 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-    // ✅ Token create karo
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "100y" });
 
-    // ✅ Cookie me token bhejo (local ke liye secure: false)
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false, // localhost ke liye false rakhna zaroori hai!
-      sameSite: "lax",
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      secure: true, // production me true
+      sameSite: "none",
+      maxAge: 60 * 60 * 1000,
     });
 
-    // ✅ Response me token bhejna important hai (Postman ke liye)
     res.status(200).json({
       message: "Login successful",
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-      },
-      token, // <--- yahi missing tha!
+      user: { id: user._id, username: user.username, email: user.email },
     });
   } catch (error) {
     console.log("Error during login:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+
+
+
+
+
+
+// // --- Login ---
+// router.post("/login", async (req, res) => {
+//   const { email, password } = req.body;
+
+//   try {
+//     const user = await Signup.findOne({ email });
+//     if (!user) return res.status(400).json({ message: "User not found" });
+
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+
+//     // ✅ Token create karo
+//     const token = jwt.sign(
+//       { id: user._id, email: user.email },
+//       process.env.JWT_SECRET,
+//       { expiresIn: "7d" }
+//     );
+
+//     // ✅ Cookie me token bhejo (local ke liye secure: false)
+//     res.cookie("token", token, {
+//       httpOnly: true,
+//       secure: false, // localhost ke liye false rakhna zaroori hai!
+//       sameSite: "lax",
+//       maxAge: 7 * 24 * 60 * 60 * 1000,
+//     });
+
+//     // ✅ Response me token bhejna important hai (Postman ke liye)
+//     res.status(200).json({
+//       message: "Login successful",
+//       user: {
+//         id: user._id,
+//         username: user.username,
+//         email: user.email,
+//       },
+//       token, // <--- yahi missing tha!
+//     });
+//   } catch (error) {
+//     console.log("Error during login:", error);
+//     res.status(500).json({ message: "Internal server error" });
+//   }
+// });
 
 
 
