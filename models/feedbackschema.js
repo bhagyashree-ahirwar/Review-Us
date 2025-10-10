@@ -6,7 +6,7 @@ const feedbackSchema = new mongoose.Schema(
     email: { type: String, required: true },
     rating: { type: Number, required: true },
     comments: { type: String, required: true },
-    qrId: { type: mongoose.Schema.Types.ObjectId, ref: "QrCode" }
+  
 
   },
   { timestamps: true }
