@@ -9,7 +9,7 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 // ✅ Create branch (protected)
-router.post("/new", authMiddleware, async (req, res) => {
+router.post("/new", async (req, res) => {
   try {
     const branch = new Branch(req.body);
 
