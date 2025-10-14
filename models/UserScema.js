@@ -4,10 +4,10 @@ const UserSchema = new mongoose.Schema({
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    // confirmPassword: { type: String, required: true },
-    sendOtp: { type: String, expOtp:Date},
-    verifyOtp: { type: String, expOtp:Date},
-    }, { timestamps: true });
+    googleReviewUrl: { type: String, default: null },
+    sendOtp: { otp: String, exp: Date },   // OTP bhejne ke liye
+    verifyOtp: { otp: String, exp: Date }, // OTP verify ke liye
+}, { timestamps: true });
 
 const User = mongoose.model('User', UserSchema);
 

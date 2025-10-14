@@ -7,7 +7,7 @@ import upload from './upload/upload.js'
 import feedbackRoutes from './feedbackRoutes/feedback.js';
 import feedbackAnalytics from './feedbackAnalytics/feedbackAnaly.js'; 
 import branch  from './auth/branchContoller.js'
-
+import GoogleUrl from './googlereviewUrl/googleReviewUrl.js'
 
 const app = express();
 
@@ -30,10 +30,12 @@ app.use(cors({
 // Routes
 app.use('/api', signupAuth);
 app.use('/api', upload);
+app.use('/api', GoogleUrl)
 // app.use('/api',authMiddleware,upload)
 app.use('/api', feedbackRoutes );
 app.use('/api/', feedbackAnalytics);
 app.use("/api", branch);
+
 
 
 // Server
