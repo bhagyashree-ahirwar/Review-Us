@@ -1,6 +1,4 @@
 
-
-
 import express from "express";
 import QRCode from "qrcode";
 import Branch from "../models/branchSchema.js";
