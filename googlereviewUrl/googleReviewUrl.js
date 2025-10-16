@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import UsersModel from '../models/UserScema.js';
-import { authMiddleware } from '../middleware/authMiddleware.js';
+// import { authMiddleware } from '../middleware/authMiddleware.js';
 
 // POST: Update Google Review URL
 router.post('/google-reviewurl', async (req, res) => {
