@@ -1,10 +1,10 @@
 import express from 'express';
 const router = express.Router();
 import UsersModel from '../models/UserScema.js';
-// import { authMiddleware } from '../middleware/authMiddleware.js';
+ import { authMiddleware } from '../middleware/authMiddleware.js';
 
 // POST: Update Google Review URL
-router.post('/google-reviewurl', async (req, res) => {
+router.post('/google-reviewurl', authMiddleware, async (req, res) => {
     const userId = req.user.id;
     const { Url } = req.body;
 
@@ -27,7 +27,7 @@ router.post('/google-reviewurl', async (req, res) => {
 });
 
 // GET: Fetch Google Review URL of logged-in user
-router.get('/google-reviewUrl',  async (req, res) => {
+router.get('/google-reviewUrl', authMiddleware, async (req, res) => {
     try {
         const user = await UsersModel.findById(req.user.id);
         if (!user) {

@@ -24,9 +24,10 @@
     "mongoose": "^8.18.3",
     "multer": "^2.0.2",
     "nanoid": "^5.1.6",
-    "nodemailer": "^7.0.6",
+    "nodemailer": "^7.0.9",
     "qrcode": "^1.5.4",
-    "shortid": "^2.2.17"
+    "shortid": "^2.2.17",
+    "twilio": "^5.10.3"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"

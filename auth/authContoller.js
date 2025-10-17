@@ -40,13 +40,12 @@ router.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "100y" });
-
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "100y" }); // token valid for 100 years
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true, // production me true
+      secure: true, // local par false bhi kar sakti ho
       sameSite: "none",
-      maxAge: 60 * 60 * 1000,
+      maxAge: 100 * 365 * 24 * 60 * 60 * 1000, // 100 years
     });
 
     res.status(200).json({
